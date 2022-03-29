@@ -8,6 +8,8 @@
     android:background="@color/ColorPrimary"
     tools:context=".SelectOptionAuthActivity">
 
+    <include layout="@layout/action_bar_toollbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
