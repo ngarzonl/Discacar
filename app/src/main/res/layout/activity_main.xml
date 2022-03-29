@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/ColorPrimary">
+
+    <!--PISOCIONAR ELEMENTOS DE MANERA VERTICAL -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/icon_uber_clone"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UberClone es una aplicacion similar a Uber"
+            android:textAlignment="center"
+            android:layout_margin="40dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:layout_margin="20dp">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorBlue"
+                android:background="@drawable/rounded_button"
+                android:text="SOY CONDUCTOR"
+                android:textColor="@color/white"
+                android:layout_marginRight="5dp"
+                />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="SOY CLIENTE"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
