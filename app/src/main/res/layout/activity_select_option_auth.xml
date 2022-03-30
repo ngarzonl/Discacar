@@ -34,6 +34,7 @@
             android:textColor="@color/white"/>
 
         <Button
+            android:id="@+id/btnGoToLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -45,6 +46,7 @@
             />
 
         <Button
+            android:id="@+id/btnGoToRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
