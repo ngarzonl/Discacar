@@ -2,6 +2,9 @@ package com.isw.discacar.activities;
 
 //import android.app.AlertDialog;
 //import dmax.dialog.SpotsDialog;
+//import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.isw.discacar.R;
+import com.isw.discacar.activities.client.MapClientActivity;
+import com.isw.discacar.activities.client.RegisterActivity;
+import com.isw.discacar.activities.driver.MapDriverActivity;
 import com.isw.discacar.includes.MyToolbar;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     DatabaseReference mDatabase;
 
+    SharedPreferences mPref;
+
     //AlertDialog mDialog;
 
     @Override
@@ -37,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         MyToolbar.show(this, "Login de usuario", true);
+
+        mPref = getApplicationContext().getSharedPreferences("typeUser", MODE_PRIVATE);
 
         mTextInputEmail = findViewById(R.id.textInputEmail);
         mTextInputPassword = findViewById(R.id.textInputPassword);
@@ -67,6 +77,17 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String typeUser = mPref.getString("user", "");
+                            if (typeUser.equals("client")) {
+                                Intent intent = new Intent(LoginActivity.this, MapClientActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
+                            else {
+                                Intent intent = new Intent(LoginActivity.this, MapDriverActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
+                            }
                             Toast.makeText(LoginActivity.this, "El login se realizo exitosamente", Toast.LENGTH_SHORT).show();
                         }
                         else {

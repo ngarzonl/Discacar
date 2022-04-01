@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:backgroundTint="@color/colorBlue"
+            android:backgroundTint="@color/colorLila"
             android:background="@drawable/rounded_button"
             android:text="YA TENGO CUENTA"
             android:textColor="@color/white"

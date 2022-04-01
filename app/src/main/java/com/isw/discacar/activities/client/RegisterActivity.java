@@ -1,8 +1,9 @@
-package com.isw.discacar.activities;
+package com.isw.discacar.activities.client;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,14 +16,14 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.isw.discacar.R;
+import com.isw.discacar.activities.driver.MapDriverActivity;
+import com.isw.discacar.activities.driver.RegisterDriverActivity;
 import com.isw.discacar.includes.MyToolbar;
 import com.isw.discacar.models.Client;
 import com.isw.discacar.providers.AuthProvider;
 import com.isw.discacar.providers.ClientProvider;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    SharedPreferences mPref;
 
     AuthProvider mAuthProvider;
     ClientProvider mClientProvider;
@@ -32,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText mTextInputName;
     TextInputEditText mTextInputEmail;
     TextInputEditText mTextInputPassword;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +44,10 @@ public class RegisterActivity extends AppCompatActivity {
         mAuthProvider = new AuthProvider();
         mClientProvider = new ClientProvider();
 
-        mPref = getApplicationContext().getSharedPreferences("typeUser", MODE_PRIVATE);
         mButtonRegister = findViewById(R.id.btnRegister);
         mTextInputName = findViewById(R.id.textInputName);
         mTextInputEmail = findViewById(R.id.textInputEmail);
         mTextInputPassword = findViewById(R.id.textInputPassword);
-
-        //Toast.makeText(this, "Usted es " + selectedUser, Toast.LENGTH_SHORT).show();
-
-
 
         mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +99,9 @@ public class RegisterActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(RegisterActivity.this, "El registro se realizo exitosamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, MapClientActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
                 else {
                     Toast.makeText(RegisterActivity.this, "No se pudo crear el cliente", Toast.LENGTH_SHORT).show();

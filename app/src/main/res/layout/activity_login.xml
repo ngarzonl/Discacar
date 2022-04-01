@@ -100,7 +100,7 @@
                 android:layout_margin="30dp"
                 android:text="REGISTRAR"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/ColorPrimary"
+                android:backgroundTint="@color/colorLila"
                 android:textColor="@color/white"/>
         </LinearLayout>
 
