@@ -7,13 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.driver.MapDriverActivity">
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cerrar sesion">
-
-    </Button>
+    <include layout="@layout/action_bar_toollbar" ></include>
 
     <fragment
         android:id="@+id/map"
@@ -21,6 +15,19 @@
         android:layout_height="match_parent"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         />
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONECTARSE"
+        android:layout_gravity="bottom"
+        android:layout_margin="30dp"
+        android:textColor="@color/white"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/ColorPrimaryDark"
+        />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

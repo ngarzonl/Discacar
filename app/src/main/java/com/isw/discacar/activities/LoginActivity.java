@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        MyToolbar.show(this, "Login de usuario", true);
+        MyToolbar.show(this, "Iniciar Sesion", true);
 
         mPref = getApplicationContext().getSharedPreferences("typeUser", MODE_PRIVATE);
 

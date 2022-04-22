@@ -7,13 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context=".activities.client.MapClientActivity">
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cerrar sesion">
-
-    </Button>
+    <include layout="@layout/action_bar_toollbar" ></include>
 
     <fragment
         android:id="@+id/map"
