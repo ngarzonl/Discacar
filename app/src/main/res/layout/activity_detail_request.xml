@@ -39,7 +39,7 @@
                 android:id="@+id/textViewOrigin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Carrera 34 calle 5 "
+                android:text=""
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -67,8 +67,66 @@
                 android:id="@+id/textViewDestination"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Carrera 34 calle 5 "
+                android:text=""
                 android:textSize="16sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiempo: "
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textViewTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Distancia: "
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textViewDistance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <Button

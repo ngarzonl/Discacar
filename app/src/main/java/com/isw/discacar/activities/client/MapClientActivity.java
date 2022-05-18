@@ -185,6 +185,8 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
             intent.putExtra("origin_lng", mOriginLatLng.longitude);
             intent.putExtra("destination_lat", mDestinationLatLng.latitude);
             intent.putExtra("destination_lng", mDestinationLatLng.longitude);
+            intent.putExtra("origin", mOrigin);
+            intent.putExtra("destination", mDestination);
             startActivity(intent);
         }
         else {
@@ -266,7 +268,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void getActiveDrivers() {
-        mGeofireProvider.getActiveDrivers(mCurrentLatLng).addGeoQueryEventListener(new GeoQueryEventListener() {
+        mGeofireProvider.getActiveDrivers(mCurrentLatLng, 10).addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
                 // AGREGAMOS LOS MARCADORES DE LOS CONDUCTORES CONECTADOS EN LA APP
