@@ -11,5 +11,6 @@
     <color name="ColorPrimaryDark">#10729E</color>
     <color name="ColorAccent">#E040FB</color>
     <color name="colorLila">#8164B5</color>
+    <color name="colorRed">#B10000</color>
 
 </resources>

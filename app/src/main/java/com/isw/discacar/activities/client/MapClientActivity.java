@@ -61,6 +61,7 @@ import com.isw.discacar.activities.driver.MapDriverActivity;
 import com.isw.discacar.includes.MyToolbar;
 import com.isw.discacar.providers.AuthProvider;
 import com.isw.discacar.providers.GeofireProvider;
+import com.isw.discacar.providers.TokenProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,6 +79,7 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
     private FusedLocationProviderClient mFusedLocation;
 
     private GeofireProvider mGeofireProvider;
+    private TokenProvider mTokenProvider;
 
     private final static int LOCATION_REQUEST_CODE = 1;
     private final static int SETTINGS_REQUEST_CODE = 2;
@@ -150,7 +152,8 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         MyToolbar.show(this, "Cliente", false);
 
         mAuthProvider = new AuthProvider();
-        mGeofireProvider = new GeofireProvider();
+        mGeofireProvider = new GeofireProvider("active_drivers");
+        mTokenProvider = new TokenProvider();
 
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
@@ -175,6 +178,8 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
                 requestDriver();
             }
         });
+
+        generateToken();
     }
 
     private void requestDriver() {
@@ -459,6 +464,11 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         if (item.getItemId() == R.id.action_logout) {
             logout();
         }
+
+        if (item.getItemId() == R.id.action_update) {
+            Intent intent = new Intent(MapClientActivity.this, UpdateProfileActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -467,5 +477,9 @@ public class MapClientActivity extends AppCompatActivity implements OnMapReadyCa
         Intent intent = new Intent(MapClientActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    void generateToken(){
+        mTokenProvider.create(mAuthProvider.getId());
     }
 }

@@ -40,12 +40,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.isw.discacar.R;
 import com.isw.discacar.activities.MainActivity;
 import com.isw.discacar.activities.client.MapClientActivity;
 import com.isw.discacar.includes.MyToolbar;
 import com.isw.discacar.providers.AuthProvider;
 import com.isw.discacar.providers.GeofireProvider;
+import com.isw.discacar.providers.TokenProvider;
 
 public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -53,6 +57,7 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
     private GoogleMap mMap;
     private SupportMapFragment mMapFragment;
     private GeofireProvider mGeofireProvider;
+    private TokenProvider mTokenProvider;
 
     private LocationRequest mLocationRequest;
     private FusedLocationProviderClient mFusedLocation;
@@ -66,6 +71,8 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
     private boolean mIsConnect = false;
 
     private LatLng mCurrentLatLng;
+
+    private ValueEventListener mListener;
 
 
     LocationCallback mLocationCallback = new LocationCallback() {
@@ -94,10 +101,35 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
                     ));
 
                     updateLocation();
+                    isDriverWorking();
                 }
             }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mListener != null) {
+            mGeofireProvider.isDriverWorking(mAuthProvider.getId()).removeEventListener(mListener);
+        }
+    }
+
+    private void isDriverWorking() {
+        mListener = mGeofireProvider.isDriverWorking(mAuthProvider.getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    disconnect();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +139,8 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
         MyToolbar.show(this, "Conductor", false);
 
         mAuthProvider = new AuthProvider();
-        mGeofireProvider = new GeofireProvider();
+        mGeofireProvider = new GeofireProvider("active_drivers");
+        mTokenProvider = new TokenProvider();
 
         mFusedLocation = LocationServices.getFusedLocationProviderClient(this);
 
@@ -126,6 +159,8 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
                 }
             }
         });
+
+        generateToken();
     }
 
     private void updateLocation() {
@@ -292,5 +327,9 @@ public class MapDriverActivity extends AppCompatActivity implements OnMapReadyCa
         Intent intent = new Intent(MapDriverActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    void generateToken(){
+        mTokenProvider.create(mAuthProvider.getId());
     }
 }
